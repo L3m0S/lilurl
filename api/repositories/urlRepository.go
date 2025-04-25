@@ -21,11 +21,11 @@ func (r *UrlRepository) Create(url *entities.Url) error {
 }
 
 func (r *UrlRepository) FindByShortId(shortId string) (*entities.Url, error) {
-	query := `SELECT * FROM urls WHERE code = ? LIMIT 1`
+	query := `SELECT * FROM urls WHERE shortId = ? LIMIT 1`
 	row := r.DB.QueryRow(query, shortId)
 
 	var url entities.Url
-	err := row.Scan(&url.ShortId, &url.Url)
+	err := row.Scan(&url.Id, &url.ShortId, &url.Url)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, nil
 	}
