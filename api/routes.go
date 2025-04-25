@@ -13,5 +13,5 @@ func SetupRoutes(mux *http.ServeMux, db *database.DataBase) {
 	urlHandler := &handlers.UrlHandler{Repo: urlRepo}
 
 	mux.HandleFunc("POST /short", urlHandler.Shortner)
-	mux.HandleFunc("GET /{shortId}", handlers.UrlRedirectHandler)
+	mux.HandleFunc("GET /{shortId}", urlHandler.UrlRedirectHandler)
 }

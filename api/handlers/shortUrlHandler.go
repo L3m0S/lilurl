@@ -40,3 +40,15 @@ func (h *UrlHandler) Shortner(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte(generatedUrl))
 }
+
+func (h *UrlHandler) UrlRedirectHandler(w http.ResponseWriter, r *http.Request) {
+	shortId := r.PathValue("shortId")
+	url, err := h.Repo.FindByShortId(shortId)
+
+	if err != nil {
+		http.Error(w, "Url not found", http.StatusNotFound)
+		return
+	}
+
+	http.Redirect(w, r, url.Url, http.StatusFound)
+}
