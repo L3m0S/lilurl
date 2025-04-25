@@ -1,12 +1,12 @@
 package api
 
 import (
-	"database/sql"
+	"lilurl/database"
 	"log"
 	"net/http"
 )
 
-func StartHttpServer(db *sql.DB) {
+func StartHttpServer(db *database.DataBase) {
 	mux := http.NewServeMux()
 	SetupRoutes(mux, db)
 	log.Println("Server running on http://localhost:8080")
